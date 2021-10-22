@@ -2,34 +2,48 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
 	games "goplay/games"
 	"io/ioutil"
 	"os"
 )
 
 type Testcases struct {
-	FindMedian [][]int `json:"find_median"`
+	FindMedian    [][]int         `json:"find_median"`
+	RemoveElement []RemoveElement `json:"remove_element"`
 }
 
-func Print(input ...interface{}) {
-	fmt.Println(input...)
+type RemoveElement struct {
+	Nums []int `json:"nums"`
+	Val  int   `json:"val"`
 }
 
-func main() {
-	Print("Let's play!")
-
-	jsonFile, err := os.Open("testcases.json")
+func GetTestcasesFromFile(path string) Testcases {
+	jsonFile, err := os.Open(path)
 	if err != nil {
-		Print(err)
+		games.Print(err)
 	}
 	byteValue, _ := ioutil.ReadAll(jsonFile)
 	var testcases Testcases
 	json.Unmarshal(byteValue, &testcases)
+	return testcases
+}
 
+func main() {
+	games.Print("Let's play!")
+	testcases := GetTestcasesFromFile("testcases.json")
+
+	// find median
 	for i := 0; i < len(testcases.FindMedian); i++ {
 		testcase := testcases.FindMedian[i]
 		result := games.FindMedian(testcase)
-		Print(result)
+		games.Print(result)
 	}
+
+	// remove val from slice
+	for i := 0; i < len(testcases.RemoveElement); i++ {
+		testcase := testcases.RemoveElement[i]
+		result := games.RemoveElement(testcase.Nums, testcase.Val)
+		games.Print(result)
+	}
+
 }
