@@ -46,4 +46,7 @@ func main() {
 		games.Print(result)
 	}
 
+	digits := "276"
+	games.LetterCombinations(digits)
+
 }
