@@ -30,23 +30,23 @@ func GetTestcasesFromFile(path string) Testcases {
 
 func main() {
 	games.Print("Let's play!")
-	testcases := GetTestcasesFromFile("testcases.json")
+	// testcases := GetTestcasesFromFile("testcases.json")
 
-	// find median
-	for i := 0; i < len(testcases.FindMedian); i++ {
-		testcase := testcases.FindMedian[i]
-		result := games.FindMedian(testcase)
-		games.Print(result)
-	}
+	// // find median
+	// for i := 0; i < len(testcases.FindMedian); i++ {
+	// 	testcase := testcases.FindMedian[i]
+	// 	result := games.FindMedian(testcase)
+	// 	games.Print(result)
+	// }
 
-	// remove val from slice
-	for i := 0; i < len(testcases.RemoveElement); i++ {
-		testcase := testcases.RemoveElement[i]
-		result := games.RemoveElement(testcase.Nums, testcase.Val)
-		games.Print(result)
-	}
+	// // remove val from slice
+	// for i := 0; i < len(testcases.RemoveElement); i++ {
+	// 	testcase := testcases.RemoveElement[i]
+	// 	result := games.RemoveElement(testcase.Nums, testcase.Val)
+	// 	games.Print(result)
+	// }
 
 	digits := "276"
-	games.LetterCombinations(digits)
-
+	result := games.LetterCombinations(digits)
+	games.Print(result)
 }

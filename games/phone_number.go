@@ -1,6 +1,6 @@
 package games
 
-func GetPhoneNums() map[string][]string {
+func GetPhoneNums(key string) []string {
 	result := make(map[string][]string)
 	result["0"] = nil
 	result["1"] = nil
@@ -12,23 +12,42 @@ func GetPhoneNums() map[string][]string {
 	result["7"] = []string{"p", "q", "r", "s"}
 	result["8"] = []string{"t", "u", "v"}
 	result["9"] = []string{"w", "x", "y", "z"}
-	return result
+	return result[key]
+}
+
+func Perm(output []string, input [][]string) []string {
+	var i, j, k, m int
+	Print("---------")
+	for k = 0; k < 3; k++ {
+		for i = 0; i < 3; i++ {
+
+			for j = 0; j < 3; j++ {
+				if k >= 1 {
+					m = 0
+				} else {
+					m = k + 1
+				}
+				// Print(k, k, m, i, m+1, j)
+				Print(input[k][k], input[m][i], input[m+1][j])
+			}
+		}
+	}
+
+	Print(output)
+	return output
 }
 
 func LetterCombinations(digits string) []string {
-	// var letters [][]string
-	var result []string
+	var letters [][]string
+	var numOfPerm int = 1
 	// // var maxSliceSize int
-	// nums := GetPhoneNums()
-	// for _, char := range digits {
-	// 	d := string(char)
-	// 	group := nums[d]
-	// 	letters = append(letters, group)
-	// 	if len(group) > maxSliceSize {
-	// 		// maxSliceSize = len(group)
-	// 	}
-	// }
 
-	// fmt.Println(result)
-	return result
+	for _, char := range digits {
+		dString := string(char)
+		nums := GetPhoneNums(dString)
+		letters = append(letters, nums)
+		numOfPerm *= len(nums)
+	}
+	var results []string
+	return Perm(results, letters)
 }
